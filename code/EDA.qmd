@@ -19,6 +19,8 @@ sf <- sf::st_as_sf(small, wkt = "geometry", crs = 4326)
 
 sf %>% st_write(., here::here("small-data", "ct.shp"))
 
+sf %>% write_csv(here::here("small-data", "ct.csv"))
+
 sf %>% 
   ggplot(aes(fill = area_in_meters, geometry = geometry)) +
   geom_sf() +
