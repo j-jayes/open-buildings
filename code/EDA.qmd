@@ -21,6 +21,14 @@ sf %>% st_write(., here::here("small-data", "ct.shp"))
 
 sf %>% write_csv(here::here("small-data", "ct.csv"))
 
+# library(geojsonsf)
+# 
+# js <- sf_geojson(sf)
+# 
+# js %>% write(here::here("small-data", "ct.geojson"))
+
+st_write(sf, here::here("small-data", "ct.geojson"))
+
 sf %>% 
   ggplot(aes(fill = area_in_meters, geometry = geometry)) +
   geom_sf() +
