@@ -1,0 +1,29 @@
+---
+title: "EDA"
+---
+
+```{r}
+library(tidyverse)
+library(sf)
+
+library(data.table)
+dt <- fread(here::here("data/1dd_buildings.csv.gz"))
+
+small <- dt %>% 
+  as_tibble() %>% 
+  filter(between(latitude, -34, -33.9),
+         between(longitude, 18.35, 18.5)) %>% 
+  slice_head(n = 30000)
+
+sf <- sf::st_as_sf(small, wkt = "geometry", crs = 4326)
+
+sf %>% st_write(., here::here("data", "ct.shp"))
+
+sf %>% 
+  ggplot(aes(fill = area_in_meters, geometry = geometry)) +
+  geom_sf() +
+  coord_sf() 
+
+
+```
+
